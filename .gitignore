@@ -1,0 +1,4 @@
+.env
+interest_rate_fetcher.ipynb
+sp500_selector.ipynb
+sp500_biggest_neg_cov.csv
