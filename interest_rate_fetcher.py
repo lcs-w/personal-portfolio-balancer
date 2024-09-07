@@ -1,6 +1,8 @@
 import pandas as pd
 import numpy as np
 
+from datetime import datetime, date
+
 from scipy.interpolate import CubicSpline
 
 # load api key from a local .env file
@@ -63,6 +65,20 @@ def get_interest_rate(
     return t_mkt_yld
 
 
+def get_effective_rate(
+    start_date: datetime = date(2019, 1, 1),
+):
+    sample_start = start_date.strftime("%Y-%m-%d")
+    return (
+        fred.get_series("DFF", observation_start=sample_start).to_frame(
+            "effective_rate"
+        )
+        / 100
+    )
+
+
 if __name__ == "__name__":
-    t_mkt_yld = get_interest_rate()
-    ...
+    # t_mkt_yld = get_interest_rate()
+    dff = get_effective_rate(date(2019, 10, 1))
+    print(dff)
+    pass
